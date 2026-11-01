@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html, body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth Touch & Hover Lift Animation (Up & Down) */
+.touch-lift {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.touch-lift:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.touch-lift:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+/* Touch Light Spotlight & Dynamic Hover Effect */
+.touch-light-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.touch-light-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(144, 224, 239, 0.6) !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 102, 255, 0.45), 0 0 30px rgba(0, 180, 216, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.touch-light-card:active {
+  transform: translateY(3px) scale(0.985);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
+}
+
+/* Light beam spotlight overlay following pointer/touch */
+.touch-light-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.22),
+    rgba(0, 102, 255, 0.15) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.touch-light-card:hover::before,
+.touch-light-card:active::before {
+  opacity: 1;
+}
+
+/* Glowing border light shine */
+.touch-light-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 102, 255, 0.12) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.touch-light-card:hover::after {
+  opacity: 1;
+}
+
+/* Subtle Idle Floating Up and Down for Cards */
+@keyframes floatGentleA {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatGentleB {
+  0%, 100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.animate-float-a {
+  animation: floatGentleA 4.5s ease-in-out infinite;
+}
+
+.animate-float-b {
+  animation: floatGentleB 5.2s ease-in-out infinite;
+}
+
+.animate-float-a:hover,
+.animate-float-b:hover {
+  animation-play-state: paused;
+}
